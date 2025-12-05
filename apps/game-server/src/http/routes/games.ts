@@ -87,14 +87,14 @@ router.get('/games/:gameType', (req: Request, res: Response) => {
     // Cache for 1 hour
     res.set('Cache-Control', 'public, max-age=3600');
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: metadata,
     });
   } catch (error) {
     log.error('Failed to fetch game info', { gameType, error });
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       error: 'Failed to fetch game info',
     });

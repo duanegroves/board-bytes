@@ -85,14 +85,14 @@ export function createRoomsRouter(roomManager: RoomManager): Router {
       // Very short cache (10 seconds) - room state changes frequently
       res.set('Cache-Control', 'public, max-age=10');
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: roomState,
       });
     } catch (error) {
       log.error('Failed to fetch room info', { roomId, error });
 
-      res.status(500).json({
+      return res.status(500).json({
         success: false,
         error: 'Failed to fetch room info',
       });
@@ -114,14 +114,14 @@ export function createRoomsRouter(roomManager: RoomManager): Router {
       // Short cache (30 seconds)
       res.set('Cache-Control', 'public, max-age=30');
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: stats,
       });
     } catch (error) {
       log.error('Failed to fetch stats', { error });
 
-      res.status(500).json({
+      return res.status(500).json({
         success: false,
         error: 'Failed to fetch stats',
       });
