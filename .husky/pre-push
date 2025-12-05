@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run lint --workspace=apps/game-server
+npm run build --workspace=apps/game-server
+

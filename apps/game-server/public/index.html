@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplayer UNO</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Lobby Screen -->
+    <div id="lobby" class="screen active">
+      <div class="container">
+        <h1>🎮 Multiplayer UNO</h1>
+        <div class="lobby-form">
+          <input type="text" id="playerName" placeholder="Enter your name" maxlength="20">
+          <input type="text" id="roomId" placeholder="Room ID (e.g., room123)" maxlength="20">
+          <button id="joinBtn" class="btn btn-primary">Join Room</button>
+        </div>
+        <div class="divider">
+          <span>OR</span>
+        </div>
+        <div class="room-list-section">
+          <div class="room-list-header">
+            <h3>Available Rooms</h3>
+            <button id="refreshRoomsBtn" class="btn btn-secondary">🔄 Refresh</button>
+          </div>
+          <div id="roomList" class="room-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Waiting Room Screen -->
+    <div id="waitingRoom" class="screen">
+      <div class="container">
+        <h2>Room: <span id="currentRoomId"></span></h2>
+        <div id="playersList" class="players-list"></div>
+        <button id="startGameBtn" class="btn btn-primary">Start Game</button>
+        <button id="leaveRoomBtn" class="btn btn-secondary">Leave Room</button>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+      <div class="game-container">
+        <!-- Top Info Bar -->
+        <div class="info-bar">
+          <div class="room-info">
+            Room: <span id="gameRoomId"></span>
+          </div>
+          <div class="deck-info">
+            Cards left: <span id="deckSize">0</span>
+          </div>
+        </div>
+
+        <!-- Other Players -->
+        <div id="otherPlayers" class="other-players"></div>
+
+        <!-- Game Board -->
+        <div class="game-board">
+          <div class="deck-area">
+            <div class="draw-pile" id="drawPile">
+              <div class="card card-back">UNO</div>
+            </div>
+            <div class="discard-pile" id="discardPile">
+              <div id="topCard" class="card"></div>
+            </div>
+          </div>
+          <div class="current-color">
+            Current Color: <span id="currentColor"></span>
+          </div>
+        </div>
+
+        <!-- Your Hand -->
+        <div class="player-hand-container">
+          <div class="hand-header">
+            <span>Your Cards</span>
+            <button id="unoBtn" class="btn btn-uno">UNO!</button>
+          </div>
+          <div id="yourHand" class="player-hand"></div>
+        </div>
+
+        <!-- Messages -->
+        <div id="messages" class="messages"></div>
+      </div>
+    </div>
+
+    <!-- Color Picker Modal -->
+    <div id="colorPicker" class="modal">
+      <div class="modal-content">
+        <h3>Choose a Color</h3>
+        <div class="color-choices">
+          <button class="color-btn" data-color="red" style="background-color: #ff5555;">Red</button>
+          <button class="color-btn" data-color="blue" style="background-color: #5555ff;">Blue</button>
+          <button class="color-btn" data-color="green" style="background-color: #55ff55;">Green</button>
+          <button class="color-btn" data-color="yellow" style="background-color: #ffff55;">Yellow</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
+
